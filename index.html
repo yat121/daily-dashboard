@@ -5,17 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daily Dashboard — 2026-04-07</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+HK:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+HK:wght@400;500;700&display=swap');
 
-  :root {
+:root {
     --bg: #0a0a0f;
-    --surface: #12121a;
-    --card: #1a1a24;
-    --card-hover: #1f1f2b;
+    --surface: #13131c;
+    --card: #181824;
     --border: rgba(255,255,255,0.06);
     --accent: #6366f1;
     --accent2: #818cf8;
-    --accent-glow: rgba(99,102,241,0.15);
     --green: #4ade80;
     --red: #f87171;
     --yellow: #fbbf24;
@@ -23,434 +21,524 @@
     --muted: #64748b;
     --muted2: #94a3b8;
     --radius: 16px;
-    --radius-sm: 10px;
-  }
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Inter', 'Noto Sans HK', -apple-system, sans-serif;
+body {
+    font-family: 'Inter','Noto Sans HK',-apple-system,sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     line-height: 1.5;
-  }
+}
 
-  /* ── Header ── */
-  .hero {
-    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+/* ── TOP STRIP (Weather + At a Glance + Crypto) ── */
+.top-strip {
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 48px 24px 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 300px;
-    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-date {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .hero-title {
+    padding: 0;
+}
+
+.top-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+}
+
+/* Weather */
+.weather-section {
+    padding: 20px 28px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.weather-big-icon { font-size: 2.8rem; line-height: 1; }
+.weather-info {}
+.weather-temp {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #fff 0%, #c7d2fe 100%);
+    line-height: 1;
+    color: var(--text);
+}
+.weather-desc { font-size: 0.82rem; color: var(--muted2); margin-top: 2px; }
+.weather-meta { font-size: 0.75rem; color: var(--muted); margin-top: 4px; display: flex; gap: 12px; }
+.weather-fc {
+    display: flex;
+    gap: 8px;
+    margin-left: 20px;
+}
+.fc-day {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    min-width: 56px;
+}
+.fc-icon { font-size: 1.3rem; }
+.fc-date { font-size: 0.68rem; color: var(--muted); margin: 3px 0 4px; }
+.fc-temps { display: flex; gap: 4px; justify-content: center; font-size: 0.8rem; font-weight: 600; }
+.fc-hi { color: var(--yellow); }
+.fc-lo { color: #93c5fd; }
+
+/* At a Glance */
+.glance-section {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-right: 1px solid var(--border);
+}
+.glance-grid {
+    display: flex;
+    gap: 0;
+}
+.glance-item {
+    padding: 0 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+}
+.glance-item:last-child { border-right: none; }
+.glance-val {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+}
+.glance-lbl {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+/* Crypto */
+.crypto-section {
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: flex-end;
+}
+.crypto-coin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.crypto-icon { font-size: 1.4rem; }
+.crypto-name { font-size: 0.75rem; color: var(--muted); }
+.crypto-price { font-size: 1rem; font-weight: 700; }
+.crypto-chg {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+/* ── Hero ── */
+.hero {
+    background: linear-gradient(180deg, #0f0f1a 0%, var(--bg) 100%);
+    padding: 36px 24px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+.hero-date {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.hero-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg,#fff 0%,#c7d2fe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
-  }
-  .hero-tagline {
-    font-size: 1rem;
+    margin-bottom: 8px;
+}
+.hero-tagline {
+    font-size: 0.92rem;
     color: var(--muted2);
     font-style: italic;
-    max-width: 500px;
-    margin: 0 auto 20px;
-  }
-  .hero-time {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-  .hero-time span {
-    color: var(--accent2);
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  /* ── Container ── */
-  .container {
-    max-width: 1100px;
+    max-width: 480px;
     margin: 0 auto;
-    padding: 32px 20px 60px;
-  }
+}
 
-  /* ── Grid ── */
-  .main-grid {
+/* ── Main Layout ── */
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 24px 60px;
+}
+
+.content-grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    grid-template-rows: auto;
+    grid-template-columns: 3fr 2fr;
     gap: 20px;
-  }
-  .content-col { display: flex; flex-direction: column; gap: 20px; }
-  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+    align-items: start;
+}
 
-  /* ── Cards ── */
-  .card {
+/* ── Cards ── */
+.card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px;
-    transition: border-color 0.2s;
-  }
-  .card:hover { border-color: rgba(255,255,255,0.1); }
-  .card-title {
-    font-size: 0.7rem;
+    overflow: hidden;
+}
+.card-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-title {
+    font-size: 0.68rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--muted);
-    margin-bottom: 18px;
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  .card-title::before {
+}
+.card-title::before {
     content: '';
     width: 3px;
-    height: 14px;
+    height: 12px;
     background: var(--accent);
     border-radius: 2px;
-  }
+}
+.card-body { padding: 16px 20px; }
 
-  /* ── News ── */
-  .news-card { grid-column: 1; }
-  .news-item {
-    display: flex;
-    gap: 14px;
-    padding: 12px 0;
+/* ── News ── */
+.news-card { grid-column: 1; }
+.news-card .card-body { padding: 0; }
+.news-row {
+    padding: 13px 20px;
     border-bottom: 1px solid var(--border);
-    align-items: flex-start;
-  }
-  .news-item:last-child { border-bottom: none; }
-  .news-num {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent);
-    min-width: 20px;
-    padding-top: 2px;
-  }
-  .news-title {
-    font-size: 0.92rem;
-    color: var(--text);
-    line-height: 1.5;
-    cursor: default;
-  }
-
-  /* ── Standup ── */
-  .standup-card { grid-column: 1; }
-  .standup-pre {
-    font-family: 'Inter', monospace;
-    font-size: 0.85rem;
-    line-height: 1.8;
-    color: var(--text);
-    white-space: pre-wrap;
-  }
-
-  /* ── Schedule ── */
-  .sched-card { grid-column: 1; }
-  .sched-pre {
-    font-family: 'Inter', monospace;
-    font-size: 0.85rem;
-    line-height: 1.8;
-    color: var(--text);
-    white-space: pre-wrap;
-  }
-
-  /* ── Sidebar: Weather ── */
-  .weather-card { }
-  .weather-main {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .weather-icon { font-size: 3.5rem; line-height: 1; }
-  .weather-temp {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1;
-  }
-  .weather-desc {
-    font-size: 0.9rem;
-    color: var(--muted2);
-    margin-top: 4px;
-  }
-  .weather-meta {
+    gap: 10px;
+}
+.news-row:last-child { border-bottom: none; }
+.news-link {
     display: flex;
-    gap: 16px;
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-bottom: 20px;
-  }
-  .weather-meta span { display: flex; align-items: center; gap: 4px; }
-  .fc-row {
-    display: flex;
-    gap: 8px;
-    justify-content: space-between;
-  }
-  .fc-day {
-    flex: 1;
-    background: var(--surface);
-    border-radius: var(--radius-sm);
-    padding: 12px 8px;
-    text-align: center;
-  }
-  .fc-emoji { font-size: 1.4rem; margin-bottom: 4px; }
-  .fc-date { font-size: 0.72rem; color: var(--muted); margin-bottom: 6px; }
-  .fc-temps { display: flex; justify-content: center; gap: 6px; font-size: 0.82rem; font-weight: 600; }
-  .fc-high { color: var(--yellow); }
-  .fc-low { color: #93c5fd; }
-
-  /* ── Sidebar: Crypto ── */
-  .crypto-item {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .crypto-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .crypto-left { display: flex; align-items: center; gap: 10px; }
-  .crypto-coin { font-size: 1.6rem; }
-  .crypto-name { font-size: 0.85rem; font-weight: 600; }
-  .crypto-price { font-size: 1rem; font-weight: 700; margin-top: 2px; }
-  .crypto-right { text-align: right; }
-  .crypto-change { font-size: 0.8rem; font-weight: 600; padding: 3px 8px; border-radius: 100px; }
-
-  /* ── Quick Stats ── */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .stat-box {
-    background: var(--surface);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-    text-align: center;
-  }
-  .stat-val {
-    font-size: 1.4rem;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    transition: background 0.15s;
+    padding: 0;
+}
+.news-link:hover { background: rgba(99,102,241,0.06); }
+.news-src {
+    font-size: 0.68rem;
     font-weight: 700;
-    color: var(--accent2);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-lbl {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* ── Empty state ── */
-  .empty-state {
-    color: var(--muted);
+    letter-spacing: 0.5px;
+    min-width: 46px;
+    flex-shrink: 0;
+}
+.news-title {
     font-size: 0.88rem;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.4;
+}
+.news-link .news-title {}
+.news-arrow {
+    color: var(--accent);
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+}
+.news-link:hover .news-arrow { opacity: 1; }
+.muted { color: var(--muted2); }
+
+/* ── Standup ── */
+.standup-card { grid-column: 1; }
+.standup-pre {
+    font-family: 'Inter', monospace;
+    font-size: 0.83rem;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+}
+
+/* ── Schedule ── */
+.schedule-card { grid-column: 2; grid-row: 1 / 3; }
+.sched-pre {
+    font-family: 'Inter', monospace;
+    font-size: 0.83rem;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+}
+
+/* ── Empty ── */
+.empty {
+    color: var(--muted);
+    font-size: 0.85rem;
     font-style: italic;
     padding: 8px 0;
-  }
+}
 
-  /* ── Footer ── */
-  .footer {
+/* ── Footer ── */
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
     text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
     border-top: 1px solid var(--border);
+    padding-top: 28px;
     color: var(--muted);
-    font-size: 0.78rem;
-  }
-  .footer a { color: var(--accent2); text-decoration: none; }
+    font-size: 0.75rem;
+}
+.footer a { color: var(--accent2); text-decoration: none; }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .main-grid { grid-template-columns: 1fr; }
-    .sidebar { flex-direction: row; flex-wrap: wrap; }
-    .sidebar .card { flex: 1 1 280px; }
-  }
-  @media (max-width: 600px) {
-    .hero { padding: 32px 16px 28px; }
-    .hero-title { font-size: 1.5rem; }
-    .container { padding: 20px 16px 40px; }
-    .card { padding: 18px; }
-    .stats-row { grid-template-columns: 1fr 1fr; }
-  }
+/* ── Responsive ── */
+@media (max-width: 960px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .schedule-card { grid-column: 1; grid-row: auto; }
+    .standup-card { grid-column: 1; }
+    .news-card { grid-column: 1; }
+}
+@media (max-width: 768px) {
+    .top-grid { grid-template-columns: 1fr; }
+    .weather-section { border-right: none; border-bottom: 1px solid var(--border); }
+    .glance-section { border-right: none; border-bottom: 1px solid var(--border); justify-content: center; }
+    .crypto-section { justify-content: center; flex-wrap: wrap; gap: 16px; }
+    .weather-fc { margin-left: 0; }
+}
+@media (max-width: 480px) {
+    .hero { padding: 24px 16px 18px; }
+    .hero-title { font-size: 1.4rem; }
+    .main { padding: 16px 12px 40px; }
+    .card-body { padding: 12px 14px; }
+    .news-row { padding: 11px 14px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ── Hero ── -->
-<div class="hero">
-  <div class="hero-date">2026-04-07 · Hong Kong</div>
-  <h1 class="hero-title">Daily Dashboard</h1>
-  <p class="hero-tagline">"The best time to plant a tree was yesterday. The second best is today."</p>
-  <div class="hero-time">🕐 <span>12:49</span> HKT</div>
-</div>
+<!-- ── TOP: Weather + At a Glance + Crypto ── -->
+<div class="top-strip">
+<div class="top-grid">
 
-<!-- ── Main Content ── -->
-<div class="container">
-<div class="main-grid">
-
-  <!-- News ── -->
-  <div class="card news-card">
-    <div class="card-title">📰 科技新聞精選 Tech News</div>
-    <div class="news-item"><span class="news-num">1</span><span class="news-title">Whats your crypto currency Bitcoin ethereum Dash litecoin trading strategy?</span></div><div class="news-item"><span class="news-num">2</span><span class="news-title">Ask HN: Cheapest computation resources?</span></div><div class="news-item"><span class="news-num">3</span><span class="news-title">BTC Price Correlations to Product Hunt Post Trends Data</span></div><div class="news-item"><span class="news-num">4</span><span class="news-title">Ask HN: Building a universal SaaS billing solution for entrepreneurs</span></div><div class="news-item"><span class="news-num">5</span><span class="news-title">Show HN: OXH AI – Open-Source AI Crypto Signal Platform with Real-Time Analysis</span></div>
-  </div>
-
-  <!-- Standup ── -->
-  <div class="card standup-card">
-    <div class="card-title">✅ Daily Standup</div>
-    <pre class="standup-pre">🤖 VV
-   Yesterday: Set up QMD memory, agent-browser skill, tech research, morning brief, daily proposer, self-improving memory system
-   Today: Monitoring workflows, ready to assist, continuing improvements
-   🔴 None 🎉
-🍫 Caca
-   Yesterday: Pushed Quant-Alpha to GitHub Pages, updated HK Cafe Map, fixed tile provider issues, implemented strategy improvements
-   Today: Coding tasks, reviewing projects, continuing improvements
-   🔴 None 🎉
-🔍 Rasp
-   Yesterday: Tech research, market analysis, QMD research tasks
-   Today: Research tasks, analysis, continuing improvements
-   🔴 None 🎉
-🎯 Mimi
-   Yesterday: Social media setup, Top5Battle content planning, marketing strategy
-   Today: Social media management, content creation, marketing tasks
-   🔴 Social media automation pending (Meta API setup)
-🥔 Potato
-   Yesterday: Quant-Alpha backtesting, RSI strategy analysis, dashboard improvements
-   Today: Trading strategy work, IBKR setup, Quant-Alpha development
-   🔴 IBKR connection pending</pre>
-  </div>
-
-  <!-- Schedule ── -->
-  <div class="card sched-card">
-    <div class="card-title">📅 Today's Schedule</div>
-    <div class="empty-state">Create ~/daily-schedule.txt to show your schedule</div>
-  </div>
-
-  <!-- Sidebar ── -->
-  <div class="sidebar">
-
-    <!-- Weather ── -->
-    <div class="card weather-card">
-      <div class="card-title">🌤 Weather</div>
-      <div class="weather-main">
-        <div class="weather-icon">☁️</div>
-        <div>
-          <div class="weather-temp">27°</div>
-          <div class="weather-desc">Partly cloudy</div>
+    <!-- Weather -->
+    <div class="weather-section">
+        <div class="weather-big-icon">☁️</div>
+        <div class="weather-info">
+            <div class="weather-temp">27°C</div>
+            <div class="weather-desc">Partly cloudy</div>
+            <div class="weather-meta">
+                <span>💧 89%</span>
+                <span>💨 15 km/h</span>
+            </div>
         </div>
-      </div>
-      <div class="weather-meta">
-        <span>💧 89%</span>
-        <span>💨 15 km/h</span>
-      </div>
-      <div class="fc-row">
+        <div class="weather-fc">
         <div class="fc-day">
-            <div class="fc-emoji">🌧️</div>
+            <div class="fc-icon">🌧️</div>
             <div class="fc-date">二</div>
-            <div class="fc-temps"><span class="fc-high">25°</span><span class="fc-low">24°</span></div>
+            <div class="fc-temps"><span class="fc-hi">25°</span><span class="fc-lo">24°</span></div>
         </div>
         <div class="fc-day">
-            <div class="fc-emoji">🌧️</div>
+            <div class="fc-icon">🌧️</div>
             <div class="fc-date">三</div>
-            <div class="fc-temps"><span class="fc-high">22°</span><span class="fc-low">21°</span></div>
+            <div class="fc-temps"><span class="fc-hi">22°</span><span class="fc-lo">21°</span></div>
         </div>
         <div class="fc-day">
-            <div class="fc-emoji">🌧️</div>
+            <div class="fc-icon">🌧️</div>
             <div class="fc-date">四</div>
-            <div class="fc-temps"><span class="fc-high">24°</span><span class="fc-low">22°</span></div>
+            <div class="fc-temps"><span class="fc-hi">24°</span><span class="fc-lo">22°</span></div>
         </div></div>
     </div>
 
-    <!-- Crypto ── -->
-    <div class="card">
-      <div class="card-title">💹 Crypto</div>
-      <div class="crypto-item">
-        <div class="crypto-left">
-          <span class="crypto-coin">₿</span>
-          <div>
-            <div class="crypto-name">Bitcoin</div>
-            <div class="crypto-price">$68663</div>
-          </div>
+    <!-- At a Glance -->
+    <div class="glance-section">
+        <div class="glance-grid">
+            <div class="glance-item">
+                <div class="glance-val">12:55</div>
+                <div class="glance-lbl">HKT</div>
+            </div>
+            <div class="glance-item">
+                <div class="glance-val">Tue</div>
+                <div class="glance-lbl">Day</div>
+            </div>
+            <div class="glance-item">
+                <div class="glance-val">07</div>
+                <div class="glance-lbl">Apr</div>
+            </div>
+            <div class="glance-item">
+                <div class="glance-val">W15</div>
+                <div class="glance-lbl">Week</div>
+            </div>
         </div>
-        <div class="crypto-right">
-          <div class="crypto-change" style="color:#f87171;background:rgba(248,113,113,0.12)">-0.54%</div>
-        </div>
-      </div>
-      <div class="crypto-item">
-        <div class="crypto-left">
-          <span class="crypto-coin">Ξ</span>
-          <div>
-            <div class="crypto-name">Ethereum</div>
-            <div class="crypto-price">$2,105.93</div>
-          </div>
-        </div>
-        <div class="crypto-right">
-          <div class="crypto-change" style="color:#f87171;background:rgba(248,113,113,0.12)">-1.01%</div>
-        </div>
-      </div>
     </div>
 
-    <!-- Quick Stats ── -->
-    <div class="card">
-      <div class="card-title">⚡ At a Glance</div>
-      <div class="stats-row">
-        <div class="stat-box">
-          <div class="stat-val">12:49</div>
-          <div class="stat-lbl">Time (HKT)</div>
+    <!-- Crypto -->
+    <div class="crypto-section">
+        <div class="crypto-coin">
+            <span class="crypto-icon">₿</span>
+            <div>
+                <div class="crypto-name">Bitcoin</div>
+                <div class="crypto-price">$68,897</div>
+                <div class="crypto-chg" style="color:#f87171;background:rgba(248,113,113,0.12)">-0.36%</div>
+            </div>
         </div>
-        <div class="stat-box">
-          <div class="stat-val">Tue</div>
-          <div class="stat-lbl">Day</div>
+        <div class="crypto-coin">
+            <span class="crypto-icon">Ξ</span>
+            <div>
+                <div class="crypto-name">Ethereum</div>
+                <div class="crypto-price">$2,116</div>
+                <div class="crypto-chg" style="color:#f87171;background:rgba(248,113,113,0.12)">-0.67%</div>
+            </div>
         </div>
-        <div class="stat-box">
-          <div class="stat-val">07</div>
-          <div class="stat-lbl">Date</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-val">W15</div>
-          <div class="stat-lbl">Week</div>
-        </div>
-      </div>
     </div>
 
-  </div><!-- /sidebar -->
-</div><!-- /main-grid -->
+</div>
+</div>
+
+<!-- ── Hero ── -->
+<div class="hero">
+    <div class="hero-date">2026-04-07 · Hong Kong</div>
+    <h1 class="hero-title">Daily Dashboard</h1>
+    <p class="hero-tagline">"The best time to plant a tree was yesterday. The second best is today."</p>
+</div>
+
+<!-- ── Main Content ── -->
+<div class="main">
+<div class="content-grid">
+
+    <!-- News -->
+    <div class="card news-card">
+        <div class="card-header">
+            <div class="card-title">📰 科技新聞精選 Tech News</div>
+        </div>
+        <div class="card-body"><div class="news-row">
+                <a href="https://www.euronews.com/2022/01/03/hong-kong-news-site-shuts-as-pro-beijing-lawmakers-sworn-in" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#f472b6">● HK</span>
+                    <span class="news-title">Hong Kong news site shuts as pro-Beijing lawmakers sworn in</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://apnews.com/2ce4e0aac2bbb360f06e481dffaf5149" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#f472b6">● HK</span>
+                    <span class="news-title">Hong Kong newspaper raided, publisher Jimmy Lai detained under new law</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.straitstimes.com/asia/east-asia/hong-kong-newspaper-runs-blank-front-page-ahead-of-tiananmen-anniversary" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#f472b6">● HK</span>
+                    <span class="news-title">Hong Kong newspaper runs blank front page ahead of Tiananmen anniversary</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.nytimes.com/2018/03/31/world/asia/south-china-morning-post-hong-kong-alibaba.html" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#f472b6">● HK</span>
+                    <span class="news-title">A Hong Kong Newspaper on a Mission to Promote China’s Soft Power</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.world-today-news.com/paralyzed-dutch-man-can-temporarily-move-and-talk-again-thanks-to-sleeping-pill-now/" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#38bdf8">● World</span>
+                    <span class="news-title">Paralyzed Dutch man can temporarily move and talk again thanks to sleeping pill</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://world-today-news.com/3-3-million-may-be-affected-nrk-norway-overview-of-news-from-different-parts-of-the-country/" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#38bdf8">● World</span>
+                    <span class="news-title">Personal data on 3.3M Norwegians may have been stolen</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.world-today-news.com/munich-e-charging-station-damaged-with-minced-meat-munich/" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#38bdf8">● World</span>
+                    <span class="news-title">Munich: E-charging station damaged with minced meat</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.world-today-news.com/dr-lois-becomes-suspect-in-hoax-cases-about-corona-threatened-for-10-years-in-prison/" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#38bdf8">● World</span>
+                    <span class="news-title">In Indonesia you can go to prison for discrediting Covid-19</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://decrypt.co/8029/norwegian-air-bitcoin-crypto-exchange" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#a78bfa">● Tech</span>
+                    <span class="news-title">Norwegian Air to accept Bitcoin, opening crypto exchange</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.bloomberg.com/news/articles/2023-06-01/crypto-rues-bitcoin-s-btc-decoupling-from-ai-fueled-tech-stock-gains" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#a78bfa">● Tech</span>
+                    <span class="news-title">Crypto Rues Bitcoin’s Decoupling from AI-Fueled Tech Stock Gains</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://www.cnbc.com/2024/07/18/bye-bye-bitcoin-hello-ai-texas-miners-leave-crypto-for-next-new-wave.html" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#a78bfa">● Tech</span>
+                    <span class="news-title">Bye-bye Bitcoin, hello AI: Texas miners leave crypto for next new wave</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div><div class="news-row">
+                <a href="https://news.ycombinator.com/item?id=36145371" target="_blank" rel="noopener" class="news-link">
+                    <span class="news-src" style="color:#a78bfa">● Tech</span>
+                    <span class="news-title">Tell HN: Anyone else happy that crypto and Bitcoin spam is over?</span>
+                    <span class="news-arrow">↗</span>
+                </a>
+            </div></div>
+    </div>
+
+    <!-- Standup -->
+    <div class="card standup-card">
+        <div class="card-header">
+            <div class="card-title">✅ Daily Standup</div>
+        </div>
+        <div class="card-body"><pre class="standup-pre">🤖 VV
+   • Set up QMD memory, agent-browser skill, tech research, morning brief, daily proposer, self-improving memory system
+   → Monitoring workflows, ready to assist, continuing improvements
+🍫 Caca
+   • Pushed Quant-Alpha to GitHub Pages, updated HK Cafe Map, fixed tile provider issues, implemented strategy improvements
+   → Coding tasks, reviewing projects, continuing improvements
+🔍 Rasp
+   • Tech research, market analysis, QMD research tasks
+   → Research tasks, analysis, continuing improvements
+🎯 Mimi
+   • Social media setup, Top5Battle content planning, marketing strategy
+   → Social media management, content creation, marketing tasks
+   🔴 Social media automation pending (Meta API setup)
+🥔 Potato
+   • Quant-Alpha backtesting, RSI strategy analysis, dashboard improvements
+   → Trading strategy work, IBKR setup, Quant-Alpha development
+   🔴 IBKR connection pending</pre></div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="card schedule-card">
+        <div class="card-header">
+            <div class="card-title">📅 Schedule</div>
+        </div>
+        <div class="card-body"><div class="empty">Create ~/daily-schedule.txt</div></div>
+    </div>
+
+</div>
+</div>
 
 <div class="footer">
-  Run <code>bash skills/daily-dashboard/generate.sh</code> to refresh · Built by <a href="https://github.com/yat121">Desmond Ho</a>
+    Run <code>bash skills/daily-dashboard/generate.sh</code> to refresh · Built by <a href="https://github.com/yat121">Desmond Ho</a>
 </div>
-</div><!-- /container -->
+
 </body>
 </html>
