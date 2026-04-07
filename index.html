@@ -36,6 +36,13 @@
     gap: 10px;
   }
   header h1 { font-size: 1.5rem; color: var(--accent); }
+  .tagline {
+    font-size: 0.9rem;
+    color: var(--accent2);
+    font-style: italic;
+    margin-top: 4px;
+    opacity: 0.9;
+  }
   .header-right {
     display: flex;
     align-items: center;
@@ -175,8 +182,9 @@
 <div class="container">
   <header>
     <h1>☀️ Daily Dashboard</h1>
+    <div class="tagline">The best time to plant a tree was yesterday. The second best is today.</div>
     <div class="header-right">
-      <span id="last-updated">Updated: 2026-04-07 09:50:13 HKT</span>
+      <span id="last-updated">Updated: 2026-04-07 12:11:15 HKT</span>
       <button class="refresh-btn" onclick="location.reload()">🔄 Refresh</button>
     </div>
   </header>
@@ -186,10 +194,34 @@
     <div class="card">
       <div class="card-title">🌤 Weather — Hong Kong</div>
       <div class="weather-current">
-        <div class="weather-temp">N/A°C</div>
-        <div class="weather-desc">N/A<br>💧 N/A% · 💨 N/A km/h</div>
+        <div class="weather-temp">27°C</div>
+        <div class="weather-desc">Partly cloudy<br>💧 89% · 💨 15 km/h</div>
       </div>
-      <div class="forecast"><div class="forecast-desc">Forecast unavailable</div></div>
+      <div class="forecast">
+        <div class="forecast-day">
+            <div class="forecast-date">Tue, Apr 07</div>
+            <div class="forecast-desc">Patchy rain nearby</div>
+            <div class="forecast-temps">
+                <span class="temp-high">25°</span>
+                <span class="temp-low">24°</span>
+            </div>
+        </div>
+        <div class="forecast-day">
+            <div class="forecast-date">Wed, Apr 08</div>
+            <div class="forecast-desc">Patchy rain nearby</div>
+            <div class="forecast-temps">
+                <span class="temp-high">22°</span>
+                <span class="temp-low">21°</span>
+            </div>
+        </div>
+        <div class="forecast-day">
+            <div class="forecast-date">Thu, Apr 09</div>
+            <div class="forecast-desc">Patchy rain nearby</div>
+            <div class="forecast-temps">
+                <span class="temp-high">24°</span>
+                <span class="temp-low">22°</span>
+            </div>
+        </div></div>
     </div>
 
     <!-- Crypto -->
@@ -198,16 +230,16 @@
       <div class="crypto-grid">
         <div class="crypto-item">
           <div class="crypto-name">Bitcoin BTC</div>
-          <div class="crypto-price">$68,584</div>
+          <div class="crypto-price">$68,663</div>
           <div class="crypto-change change-down">
-            ▼ -0.35%
+            ▼ -0.54%
           </div>
         </div>
         <div class="crypto-item">
           <div class="crypto-name">Ethereum ETH</div>
-          <div class="crypto-price">$2,108</div>
+          <div class="crypto-price">$2,106</div>
           <div class="crypto-change change-down">
-            ▼ -0.40%
+            ▼ -1.01%
           </div>
         </div>
       </div>
@@ -256,7 +288,7 @@
       <div class="stats-row">
         <div class="stat-item">
           <span class="stat-label">Time (HK)</span>
-          <span class="stat-value">09:50:13</span>
+          <span class="stat-value">12:11:15</span>
         </div>
         <div class="stat-item">
           <span class="stat-label">Day</span>
